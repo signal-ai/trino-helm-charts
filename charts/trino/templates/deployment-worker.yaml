@@ -62,6 +62,11 @@ spec:
           secret:
             secretName: {{ .secretName }}
         {{- end }}
+        {{- range .Values.worker.persistentVolumeClaimMounts }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .persistentVolumeClaim }}
+        {{- end }}
         {{- range .Values.worker.secretMounts }}
         - name: {{ .name }}
           secret:
@@ -95,6 +100,10 @@ spec:
             {{- range .Values.worker.secretMounts }}
             - name: {{ .name }}
               mountPath: {{ .path }}
+            {{- end }}
+            {{- range .Values.worker.persistentVolumeClaimMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .volumeMountPath }}
             {{- end }}
           ports:
             - name: http
