@@ -72,6 +72,7 @@ spec:
           secret:
             secretName: {{ .secretName }}
         {{- end }}
+        {{ .Values.worker.additionalVolumes }}
       {{- if .Values.initContainers.worker }}
       initContainers:
       {{- tpl (toYaml .Values.initContainers.worker) . | nindent 6 }}
@@ -101,10 +102,7 @@ spec:
             - name: {{ .name }}
               mountPath: {{ .path }}
             {{- end }}
-            {{- range .Values.worker.persistentVolumeClaimMounts }}
-            - name: {{ .name }}
-              mountPath: {{ .volumeMountPath }}
-            {{- end }}
+            {{ .Values.worker.additionalVolumeMounts }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

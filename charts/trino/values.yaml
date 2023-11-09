@@ -292,10 +292,10 @@ worker:
     #   secretName: sample-secret
     #   path: /secrets/sample.json
 
-  persistentVolumeClaimMounts: []
-  # - name: sample-persistent-volume
-  #   persistentVolumeClaim: sample-persistent-volume
-  #   volumeMountPath: /sample
+  additionalVolumes: []
+
+  additionalVolumeMounts: []
+
 
 kafka:
   mountPath: "/etc/trino/schemas"
