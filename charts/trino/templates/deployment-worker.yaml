@@ -41,6 +41,7 @@ spec:
       serviceAccountName: {{ include "trino.serviceAccountName" . }}
       {{- with .Values.securityContext }}
       securityContext:
+        fsGroup: {{ .runAsGroup }}
         runAsUser: {{ .runAsUser }}
         runAsGroup: {{ .runAsGroup }}
       {{- end }}
