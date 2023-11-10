@@ -67,7 +67,9 @@ spec:
           secret:
             secretName: {{ .secretName }}
         {{- end }}
-        {{- toYaml .Values.worker.additionalVolumes | nindent 8 }}
+        {{- if .Values.worker.additionalVolumes }}
+        {{- tpl (toYaml .Values.worker.additionalVolumes) . | nindent 8 }}
+        {{- end }}
       {{- if .Values.initContainers.worker }}
       initContainers:
       {{- tpl (toYaml .Values.initContainers.worker) . | nindent 6 }}
@@ -97,7 +99,9 @@ spec:
             - name: {{ .name }}
               mountPath: {{ .path }}
             {{- end }}
-            {{- toYaml .Values.worker.additionalVolumeMounts | nindent 12 }}
+            {{- if .Values.worker.additionalVolumeMounts }}
+            {{- tpl (toYaml .Values.worker.additionalVolumeMounts) . | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
