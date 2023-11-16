@@ -298,6 +298,8 @@ worker:
 
   additionalVolumeClaimTemplates: []
 
+  podManagementPolicy: "OrderedReady"
+
 
 kafka:
   mountPath: "/etc/trino/schemas"
