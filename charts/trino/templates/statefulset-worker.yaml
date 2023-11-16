@@ -21,6 +21,10 @@ spec:
       app: {{ template "trino.name" . }}
       release: {{ .Release.Name }}
       component: worker
+  {{- if .Values.worker.additionalVolumeClaimTemplates }}
+  volumeClaimTemplates:
+  {{- tpl (toYaml .Values.worker.additionalVolumeClaimTemplates) . | nindent 2 }}
+  {{- end }}
   template:
     metadata:
       {{- if .Values.worker.annotations }}

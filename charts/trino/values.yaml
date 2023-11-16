@@ -296,6 +296,8 @@ worker:
 
   additionalVolumeMounts: []
 
+  additionalVolumeClaimTemplates: []
+
 
 kafka:
   mountPath: "/etc/trino/schemas"
