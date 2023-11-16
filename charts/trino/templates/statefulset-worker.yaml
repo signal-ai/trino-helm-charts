@@ -1,6 +1,6 @@
 {{- if gt (int .Values.server.workers) 0 }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ template "trino.worker" . }}
   labels:
